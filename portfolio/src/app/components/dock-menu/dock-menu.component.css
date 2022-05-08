@@ -1,0 +1,57 @@
+
+
+#dock-container {
+position: fixed;
+bottom: 0;                                  /* the position to fixed and make bottom to ‘0’*/
+text-align: center;                         /* to center icons */
+right: 25%;
+left: 25%;
+width: 50%;
+background: rgba(255,255,255,0.4);        /* semi-transparent background color */
+border-radius: 32px 32px 0 0;               /* rounded top corners*/
+
+}
+#dock-container li {
+    list-style-type: none;                  /* no bulets */
+    display: inline-block;                  /* one beside the other instead of below */
+    position: relative;
+}
+
+#dock-container li img {
+    width: 64px;                            /* scale the images */
+    height: 64px;
+    -webkit-box-reflect: below 2px          /* specify the reflection of the menu */
+              -webkit-gradient(linear, left top, left bottom, from(transparent),
+              color-stop(0.7, transparent), to(rgba(255,255,255,.5)));
+    -webkit-transition: all 0.3s;
+    -webkit-transform-origin: 50% 100%;
+  }
+
+  #dock-container li:hover img { 
+    -webkit-transform: scale(2);            /* On hover, transform: scale to 2, to show the zoom effect */
+    margin: 0 2em;
+  }
+  #dock-container li:hover + li img,        /*zoom the icon at the right and left hand side of the hovered icon */
+  #dock-container li.prev img {
+    -webkit-transform: scale(1.5);
+    margin: 0 1.5em;
+  }
+
+  #dock-container li span {                 /* The span is hidden by default */
+    display: none;
+    position: absolute;
+    bottom: 140px;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0,0,0,0.75);    /* background color of the tag */
+    padding: 4px 0;
+    border-radius: 12px;
+}
+#dock-container li:hover span {             /* and only only showed when the maouse is over */
+    display: block;
+    color: rgb(182, 62, 62);                          /* color of the tag text */
+}
+
+#dock li{
+  padding: 10px 5px 5px 5px;
+}

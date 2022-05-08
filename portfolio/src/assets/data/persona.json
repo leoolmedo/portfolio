@@ -1,0 +1,32 @@
+[
+    {
+        "id": 2,
+        "names": "Leonardo Javier",
+        "lastNames": "Olmedo",
+        "phone": null,
+        "cellPhone": "+5492604312515",
+        "email": "leoolmedo@hotmail.com",
+        "workEmail": "leoolmedo",
+        "address": "av roca 1159",
+        "state": "Mendoza",
+        "country": "Argentina",
+        "user": "leoolmedo",
+        "password": "23644872",
+        "bornDate": "1977-06-03T00:00:00.000+00:00"
+    },
+    {
+        "id": 3,
+        "names": "Silvia Edit",
+        "lastNames": "castelan",
+        "phone": "+5492604590008",
+        "cellPhone": "phone",
+        "email": "emailaddress@ht.com",
+        "workEmail": null,
+        "address": "address",
+        "state": "Mendoza",
+        "country": "arg",
+        "user": "secastelan",
+        "password": "25987046",
+        "bornDate": "1974-03-05T00:00:00.000+00:00"
+    }
+]

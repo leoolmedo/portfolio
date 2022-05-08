@@ -1,0 +1,71 @@
+.back-header{
+    background-image: url("../../../assets/img/potw2034a_thin-head.jpg");
+    background-size:cover;
+    border-radius: 32px 32px 0 0;
+    /* width: 100%; */
+    height: 12em;
+
+}
+
+.pad-top{
+    padding-top: 1em;
+}
+
+.yp-logo{
+    width: 170px;
+    border-radius: 32px 0 0 0;
+}
+
+.bottom-header{
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 0 0 32px 32px;
+    color: rgb(182, 62, 62);
+    /* width: 100%; */
+}
+
+.profile-image-container{
+    height: 100px;
+    /* border: 2px solid white;    */
+}
+
+.profile-image {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    margin-top: -70px;
+    position: absolute;
+    z-index: 1;
+ 
+}
+
+.prof-logo-company{
+    width: 50px;
+    height: 50px;
+
+}
+
+.link{
+    color: rgb(182, 62, 62);
+}
+
+.media-link{
+    padding-right: 1em;
+}
+
+.btn-right{
+    float: right;
+}
+
+.info-company{
+    font-size: 1.2rem;
+    font-weight: 400;
+    line-height: 1.25;
+}
+
+.info-contact{
+    font-size: 1em;
+}
+
+.login-btn{
+    height: 3em;
+}
