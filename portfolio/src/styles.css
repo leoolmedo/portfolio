@@ -1,1 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+.body-background{
+    background-size:cover; 
+    background-repeat: no-repeat; 
+    background-color: rgb(56, 50, 50);
+    background-blend-mode: lighten;
+
+}

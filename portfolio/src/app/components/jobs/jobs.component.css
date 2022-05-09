@@ -1,0 +1,26 @@
+.card-item{
+    /* padding: 10px; */
+    /* width: auto; */
+    margin: 20px auto;
+    /* border-color: #0a66c2; */
+    /* border-width: 2px; */
+    border-radius: 25px;
+    background-color: rgba(130, 95, 150, 0.4);
+    /* color: rgb(182, 62, 62); */
+    color: rgb(192, 170, 168);
+
+    
+}
+.card-item h1{
+
+    font-size: 1.3rem;
+    display: inline;
+    font-weight: 500;
+    line-height: 1.25;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
+.btn-edit{
+    text-align: right;
+}

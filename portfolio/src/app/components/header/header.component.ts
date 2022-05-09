@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
     this.personData={};
     this.servBackend.readbackend().subscribe(data => {
       this.personData=data[0];
-      console.log(this.personData);
+      // console.log(this.personData);
     });
   }
 
