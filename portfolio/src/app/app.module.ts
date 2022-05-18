@@ -8,6 +8,7 @@ import { DockMenuComponent } from './components/dock-menu/dock-menu.component';
 import { PersonalDataComponent } from './components/personal-data/personal-data.component';
 import { JobsComponent } from './components/jobs/jobs.component';
 import { EducationComponent } from './components/education/education.component';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +20,8 @@ import { EducationComponent } from './components/education/education.component';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

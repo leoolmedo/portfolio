@@ -1,14 +1,15 @@
 
 
 #dock-container {
-position: fixed;
-bottom: 0;                                  /* the position to fixed and make bottom to ‘0’*/
+/* position: fixed;
+bottom: 0;                                  the position to fixed and make bottom to ‘0’ */
 text-align: center;                         /* to center icons */
-right: 25%;
-left: 25%;
-width: 50%;
+/* right: 20%;
+left: 20%;
+width: 58%; */
 background: rgba(255,255,255,0.4);        /* semi-transparent background color */
-border-radius: 32px 32px 0 0;               /* rounded top corners*/
+border-radius: 32px;                        /* rounded top corners*/
+margin-top: 1em;
 
 }
 #dock-container li {
@@ -18,8 +19,8 @@ border-radius: 32px 32px 0 0;               /* rounded top corners*/
 }
 
 #dock-container li img {
-    width: 64px;                            /* scale the images */
-    height: 64px;
+    width: 4em;                            /* scale the images */
+    height: 4em;
     -webkit-box-reflect: below 2px          /* specify the reflection of the menu */
               -webkit-gradient(linear, left top, left bottom, from(transparent),
               color-stop(0.7, transparent), to(rgba(255,255,255,.5)));
@@ -47,7 +48,7 @@ border-radius: 32px 32px 0 0;               /* rounded top corners*/
     padding: 4px 0;
     border-radius: 12px;
 }
-#dock-container li:hover span {             /* and only only showed when the maouse is over */
+#dock-container li:hover span {             /* and only only showed when the mouse is over */
     display: block;
     color: rgb(182, 62, 62);                          /* color of the tag text */
 }

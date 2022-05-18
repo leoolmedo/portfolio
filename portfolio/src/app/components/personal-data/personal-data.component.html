@@ -1,14 +1,125 @@
-<!-- Your persoanl info will be inserted here -->
 <div class="card card-item" >
     <div class="btn-edit">
-        <a href="#" class="btn-right"> <i class="fa fa-pen"></i></a>
+        <button type="button" class="btn" data-toggle="modal" data-target="#personal-modal" (click)="onEditModal()">
+            <i class="fa fa-pen btn-edit"></i>
+          </button>
     </div>
     <div class="card-body">
-        <h4 class="card-title"><strong>Leonardo Javier Olmedo</strong></h4>
-        <p class="card-text"><strong>Address:</strong> Av. Roca 1159 (5613)</p>
-        <p class="card-text"><strong>City:</strong> Malargüe</p>
-        <p class="card-text"><strong>Country, State:</strong> Argentina, Mendoza</p>
-        <p class="card-text"><strong>Telephone: +54 9260 431-2515</strong> </p>
-        <p class="card-text"><strong>E-mail:</strong>leoolmedo@hotmail.com</p>
+        <h4 class="card-title"><strong>{{perData.names}} {{perData.lastNames}}</strong></h4>
+        <p class="card-text"><strong>Address: </strong>{{perData.address}} </p>
+        <p class="card-text"><strong>City: </strong>{{perData.city}}</p>
+        <p class="card-text"><strong>Country, State: </strong>{{perData.country}}, {{perData.state}}</p>
+        <p class="card-text"><strong>Telephone: </strong> {{perData.phone}}</p>
+        <p class="card-text"><strong>Cellphone: </strong> {{perData.cellPhone}}</p>
+        <p class="card-text"><strong>E-mail: </strong>{{perData.email}}</p>
     </div>
 </div>
+
+<div *ngIf=showModal class="modal fade" id="personal-modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title modal-labels">Personal information edit</h5>
+                <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">
+                    <span class="modal-labels">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text modal-labels">First names</span>
+                    </div>
+                    <input type="text" class="form-control modal-inputs" [(ngModel)]="perData.names">
+                </div>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text modal-labels">Last names</span>
+                    </div>
+                    <input type="text" class="form-control modal-inputs" [(ngModel)]="perData.lastNames" name="modal-lastnames">
+                </div>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text modal-labels">Telephone</span>
+                    </div>
+                    <input type="text" class="form-control modal-inputs" [(ngModel)]="perData.phone" name="modal-telephone">
+                </div>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text modal-labels">Cell Phone</span>
+                    </div>
+                    <input type="text" class="form-control modal-inputs" [(ngModel)]="perData.cellPhone" name="modal-cellphone">
+                </div>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text modal-labels">Email</span>
+                    </div>
+                    <input type="text" class="form-control modal-inputs" [(ngModel)]="perData.email" name="modal-email">
+                </div>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text modal-labels">Work Email</span>
+                    </div>
+                    <input type="text" class="form-control modal-inputs" [(ngModel)]="perData.workEmail" name="modal-email">
+                </div>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text modal-labels">Address</span>
+                    </div>
+                    <input type="text" class="form-control modal-inputs" [(ngModel)]="perData.address" name="modal-address">
+                </div>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text modal-labels">City</span>
+                    </div>
+                    <input type="text" class="form-control modal-inputs" [(ngModel)]="perData.city" name="modal-city">
+                </div>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text modal-labels">State</span>
+                    </div>
+                    <input type="text" class="form-control modal-inputs" [(ngModel)]="perData.state" name="modal-state">
+                </div>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text modal-labels">Country</span>
+                    </div>
+                    <input type="text" class="form-control modal-inputs" [(ngModel)]="perData.country" name="modal-country">
+                </div>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text modal-labels">Born Date</span>
+                    </div>
+                    <input type="text" class="form-control modal-inputs" 
+                        [ngModel]="perData.bornDate | date:'longDate' :'UTC'" 
+                        (ngModelChange)="perData.bornDate=$event" name="modal-email">
+                </div>
+
+
+                <!-- <div class="input-group-prepend">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text modal-labels">Input</span>
+                    </div>
+                    <input type="text" class="form-control modal-inputs" name="modal-input">
+                    </div>
+                </div> -->
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn modal-inputs" data-dismiss="modal" (click)="closeModal()">Close</button>
+                <button type="button" class="btn modal-inputs" data-dismiss="modal" (click)="personUpdate()">Save changes</button>
+                <!-- Tha data-dismiss was added to the save changes buton in order to close the modal dialog properlyc -->
+            </div>
+      </div>
+    </div>
+  </div>
+

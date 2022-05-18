@@ -6,11 +6,19 @@ import { Observable, observable } from 'rxjs';
   providedIn: 'root'
 })
 export class BackendService {
-
+  urls ={
+    readperson: "http://localhost:8080/readperson",
+    saveperson: "http://localhost:8080/saveperson",
+  
+  }
   constructor(private Http:HttpClient) { }
 
-  readbackend():Observable<any>{
-    return this.Http.get('http://localhost:8080/readperson');
+  readPerson():Observable<any>{
+    return this.Http.get(this.urls.readperson);
     // return this.Http.get('assets/data/persona.json');
+  }
+
+  updatePerson(perData:any):Observable<any>{
+    return this.Http.post<any>(this.urls.saveperson,perData);
   }
 }
