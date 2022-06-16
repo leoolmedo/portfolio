@@ -1,14 +1,159 @@
-<!-- Insert your works related info below! -->
 <div class="card card-item" >
-    <div class="btn-edit">
-        <a href="#" class="btn-right"> <i class="fa fa-pen"></i></a>
-    </div>
-    <img src="./img/Logo_Telespazio_400_px_colore_sfondotrasparente_eng.png" class="card-img-top logoCompany" alt="Telespazio Argentina S.A.">
     <div class="card-body">
-        <h4 class="card-title"><strong>Telespazio Argentina S.A.</strong></h4>
-        <p class="card-text"><strong>Puesto:</strong> M&O Technician (Satcom)</p>
-        <p class="card-text"><strong>Período:</strong> 01/04/2012 - Actualidad</p>
-        <p class="card-text"><strong>Lugar de trabajo:</strong> Malargüe, Mendoza.</p>
-        <a target="_blank" href="https://www.telespazio.com/es/argentina" class="btn btn-primary">Visitar web Institucional</a>
+        <h4 class="card-title"><strong>My jobs</strong></h4>
+        <p class="card-text"><strong>Here I let you know the previous jobs and activities I performed and responsabilities I had</strong></p>
+        <p class="card-txt">Please use the buttons to sort the jobs<span *ngIf="editable()"> or add a new one with the pluss</span>.</p>
+        <div>
+            <button class="menuButton" (click)="orderJob(true)"><i class="fas fa-arrow-alt-circle-down"></i> Down</button>
+            <button class="menuButton" (click)="orderJob(false)"><i class="fas fa-arrow-alt-circle-up"></i> Up</button>
+            <button *ngIf="editable()" type="button" class="menuButton" data-toggle="modal" data-target="#job-modal" (click)="onNewJob()">
+                <i class="fas fa-plus-circle"> Add</i> 
+            </button>
+        </div> 
+    </div>
+</div>
+
+<!-- Insert your works related info below! -->
+<div *ngFor="let job of jobData">
+    <div class="card card-item" >
+        <div *ngIf="editable()" class="btn-edit">
+            <button type="button" class="btn" data-toggle="modal" data-target="#job-modal" (click)="onEditJobModal(job.id)">
+                <i class="fa fa-pen btn-edit"></i>
+            </button>
+            <button type="button" class="btn" data-toggle="modal" data-target="#job-modal" (click)="onDelJobModal(job.id)">
+                <i class="fa fa-close btn-edit"></i>
+            </button>
+        </div>
+        <div class="row align-items-center">
+            <div class="col-sm-12 col-md-2 align-middle">
+                <a href="{{job.webPage}}" target="_blank">
+                    <img src="{{job.logo}}" class="card-img-top logoCompany mx-auto d-block" alt="{{job.company}}">
+                </a>
+            </div>
+            <div class="col-sm-12 col-md-4 card-body">
+                <h4 class="card-title"><strong>{{job.company}}</strong></h4>
+                <p class="card-text"><strong>Role: </strong>{{job.role}}</p>
+                <p class="card-text"><strong>Period: </strong>{{job.startDate | date:'MMM, YYYY' :'UTC'}} - {{job.endDate | date:'MMM, YYYY' :'UTC'}}<span *ngIf="job.endDate == null">Up to now</span> </p>
+                <p class="card-text"><strong>Place of Work: </strong>{{job.place}}</p>
+                <a target="_blank" href="{{job.webPage}}" class="btn btn-primary">Visit Company webpage</a>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <h4 class="card-title">Activities perfrormed</h4>
+                <p class="card-text activities">{{job.activities}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div *ngIf=showJobModal class="modal fade" id="job-modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title modal-labels">Job information edit</h5>
+                <button type="button" class="close" data-dismiss="modal" (click)="closeJobModal()">
+                    <span class="modal-labels">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text modal-labels">Company</span>
+                    </div>
+                    <input type="text" class="form-control modal-inputs" [(ngModel)]="jobDataBkp.company" required #company="ngModel">
+                </div>
+                <!-- <div *ngIf="company.invalid && (company.dirty || company.touched)" class="alert">
+                    <div *ngIf="company.errors?.['required']">
+                        Company name is required.
+                    </div>
+                </div> -->
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text modal-labels">Role</span>
+                    </div>
+                    <input type="text" class="form-control modal-inputs" [(ngModel)]="jobDataBkp.role" required #role="ngModel">
+                </div>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text modal-labels">Start Date</span>
+                    </div>
+                    <input type="date" class="form-control modal-inputs" [(ngModel)]="jobDataBkp.startDate" [ngModel]="jobDataBkp.startDate | date: 'YYYY-MM-dd'" required #startDate="ngModel">
+                </div>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text modal-labels">End Date</span>
+                    </div>
+                    <input type="date" class="form-control modal-inputs" [(ngModel)]="jobDataBkp.endDate" [ngModel]="jobDataBkp.endDate | date: 'YYYY-MM-dd'" >
+                </div>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text modal-labels">Activities</span>
+                    </div>
+                    <textarea rows="4" cols="20" maxlength="200" class="form-control modal-inputs" [(ngModel)]="jobDataBkp.activities"></textarea>
+                </div>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text modal-labels">References</span>
+                    </div>
+                    <input type="text" class="form-control modal-inputs" [(ngModel)]="jobDataBkp.reference">
+                </div>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text modal-labels">Place</span>
+                    </div>
+                    <input type="text" class="form-control modal-inputs" [(ngModel)]="jobDataBkp.place">
+                </div>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text modal-labels">Institucional web</span>
+                    </div>
+                    <input type="text" class="form-control modal-inputs" [(ngModel)]="jobDataBkp.webPage">
+                </div>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text modal-labels">Logo</span>
+                    </div>
+                    <input type="text" class="form-control modal-inputs" [(ngModel)]="jobDataBkp.logo">
+                </div>
+                <div>
+                    <img src="{{jobDataBkp.logo}}" class="logoCompany mx-auto d-block" alt="Company logo preview">
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn modal-inputs" data-dismiss="modal" (click)="closeJobModal()">Close</button>
+                <button type="button" class="btn modal-inputs" data-dismiss="modal" (click)="jobUpdate()">Save changes</button>
+                <!-- Tha data-dismiss was added to the save changes buton in order to close the modal dialog properlyc -->
+            </div>
+      </div>
+    </div>
+</div>
+
+<div *ngIf=showDelJobModal class="modal fade" id="delJobModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title modal-labels">Delete education item</h5>
+                <button type="button" class="close" data-dismiss="modal" (click)="closeDelJobModal()">
+                    <span class="modal-labels">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h4 class="delMessage" >Are you sure do you whant to delete the item <br> <strong>{{jobDataBkp.company}}</strong>? </h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn modal-inputs" data-dismiss="modal" (click)="closeDelJobModal()">Cancel</button>
+                <button type="button" class="btn modal-inputs" data-dismiss="modal" (click)="jobDelete(jobDataBkp.id)">Delete Item</button>
+                <!-- Tha data-dismiss was added to the save changes buton in order to close the modal dialog properlyc -->
+            </div>
+        </div>
     </div>
 </div>

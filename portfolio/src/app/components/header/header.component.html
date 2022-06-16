@@ -17,7 +17,9 @@
             <div class="row align-items-middle bottom-header" >
                 <div class="col-11 col-sm-4 col-md-3">
                     <div class="profile-image-container"><img class="profile-image" src="./assets/img/perfil4.png"></div>
-                    <div class="align-bottom login-btn"><button class="pad-top btn-danger">Login</button></div>
+                    <div class="align-bottom login-btn">
+                        <button class="pad-top btn-danger" (click)="onClickEdit()">Login</button>
+                    </div>
                 </div>
 
                 <div class="col-11 col-sm-7 col-md-4">
@@ -87,7 +89,7 @@
                     </a>
                 </div>
                 <div class="col-1">
-                    <div class="btn-edit">
+                    <div *ngIf="editable()" class="btn-edit">
                         <a href="#" class="btn-right link"> <i class="fa fa-pen"></i></a>
                     </div>
                 </div>

@@ -1,8 +1,8 @@
 <div class="card card-item" >
-    <div class="btn-edit">
+    <div *ngIf="editable()" class="btn-edit">
         <button type="button" class="btn" data-toggle="modal" data-target="#personal-modal" (click)="onEditModal()">
             <i class="fa fa-pen btn-edit"></i>
-          </button>
+        </button>
     </div>
     <div class="card-body">
         <h4 class="card-title"><strong>{{perData.names}} {{perData.lastNames}}</strong></h4>
@@ -104,20 +104,11 @@
                         (ngModelChange)="perData.bornDate=$event" name="modal-email">
                 </div>
 
-
-                <!-- <div class="input-group-prepend">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text modal-labels">Input</span>
-                    </div>
-                    <input type="text" class="form-control modal-inputs" name="modal-input">
-                    </div>
-                </div> -->
-
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn modal-inputs" data-dismiss="modal" (click)="closeModal()">Close</button>
                 <button type="button" class="btn modal-inputs" data-dismiss="modal" (click)="personUpdate()">Save changes</button>
-                <!-- Tha data-dismiss was added to the save changes buton in order to close the modal dialog properlyc -->
+                <!-- The data-dismiss was added to the save changes buton in order to close the modal dialog properlly -->
             </div>
       </div>
     </div>

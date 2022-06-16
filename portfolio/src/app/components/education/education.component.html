@@ -1,14 +1,191 @@
-<!-- Your education and skills will be inserted here below-->
+
 <div class="card card-item" >
-    <div class="btn-edit">
-        <a href="#" class="btn-right"> <i class="fa fa-pen"></i></a>
-    </div>
-    <img src="./img/logo-utn-siglas.png" class="card-img-top logoCompany" alt="Universidad Tecnológica Nacional">
     <div class="card-body">
-        <h4 class="card-title"><strong>Universidad Tecnológica Nacional - Facultad Regional Haedo</strong></h4>
-        <p class="card-text"><strong>Carrera:</strong> Ingeniería electrónica</p>
-        <p class="card-text"><strong>Período:</strong> 1996 - 2004</p>
-        <p class="card-text"><strong>Lugar:</strong> Haedo, Buenos Aires.</p>
-        <a target="_blank" href="http://fra.utn.edu.ar" class="btn btn-primary">Visitar web Institucional</a>
+        <h4 class="card-title"><strong>Education</strong></h4>
+        <p class="card-text"><strong>These are the education institutes where I learn many of the things I know.</strong></p>
+        <p class="card-txt">Please use the buttons to sort the Institutes<span *ngIf="editable()"> or add a new one with the pluss</span></p>
+        <div>
+            <button class="menuButton" (click)="orderEdu(true)"><i class="fas fa-arrow-alt-circle-down"></i> Down</button>
+            <button class="menuButton" (click)="orderEdu(false)"><i class="fas fa-arrow-alt-circle-up"></i> Up</button>
+            <button *ngIf="editable()" type="button" class="menuButton" data-toggle="modal" data-target="#education-modal" (click)="onNewEdu()">
+                <i class="fas fa-plus-circle"> Add</i> 
+            </button>
+        </div> 
+    </div>
+</div>
+
+<!-- Your education and skills will be inserted here below-->
+<div *ngFor="let educa of eduData">
+    <div class="card card-item" >
+        <div *ngIf=editable() class="btn-edit">
+            <button type="button" class="btn" data-toggle="modal" data-target="#education-modal" (click)="onEditEduModal(educa.id)">
+                <i class="fa fa-pen btn-edit"></i>
+            </button>
+            <button type="button" class="btn" data-toggle="modal" data-target="#delEduModal" (click)="onDelEduModal(educa.id)">
+                <i class="fa fa-close btn-edit"></i>
+            </button>
+        </div>
+        <div class="col-12 col-sm-3">
+            <a target="_blank" href={{educa.webPage}} >
+                <img src={{educa.logo}} class="card-img-top logoInstitute mx-auto d-block" alt={{educa.institute}}>
+            </a>
+        </div>
+        <div class="card-body col-12 col-sm-9">
+            
+            <!-- <img src="../../../assets/img/logo-ap.png" class="rounded float-right img-thumbnail" alt=""> -->
+            <img src="{{educa.certificate}}" class="rounded float-right img-thumbnail" alt="No certificate image available">
+            <a *ngIf="educa.certLink" target="_blank" href="{{educa.certLink}}">Certificate Link</a>
+            <h4 class="card-title"><strong>{{educa.institute}}</strong></h4>
+            <p class="card-text"><strong>Career: {{educa.career}}</strong></p>
+            <p class="card-text"><strong>Period: </strong>{{educa.startDate | date:'MMM, YYYY' :'UTC'}} - {{educa.endDate | date:'MMM, YYYY' :'UTC'}}</p>
+            <p class="card-text"><strong>Place: </strong> {{educa.place}}.</p>
+            <a target="_blank" href={{educa.webPage}} >Visit institutional webpage</a>
+        </div>
+    </div>
+</div>
+
+
+<div *ngIf=showEduModal class="modal fade" id="education-modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title modal-labels">Education information edit</h5>
+                <button type="button" class="close" data-dismiss="modal" (click)="closeEduModal()">
+                    <span class="modal-labels">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text modal-labels">Institute</span>
+                    </div>
+                    <input type="text" class="form-control modal-inputs" [(ngModel)]="eduDataBkp.institute" required #institute="ngModel">
+                </div>
+                <!-- Validación de la institución  no puede estar vacía-->
+                <div *ngIf="institute.invalid && (institute.dirty || institute.touched)" class="alert">
+                    <div *ngIf="institute.errors?.['required']">
+                        Institute Name is required.
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text modal-labels">Career</span>
+                    </div>
+                    <input type="text" class="form-control modal-inputs" [(ngModel)]="eduDataBkp.career" required #carrer="ngModel">
+                </div>
+                <!-- Validacion de la carrera: no puede estar vacía -->
+                <div *ngIf="carrer.invalid && (carrer.dirty || carrer.touched)" class="alert">
+                    <div *ngIf="carrer.errors?.['required']">
+                        Carrer Name is required.
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text modal-labels">Start Date</span>
+                    </div>
+                    <input type="date" class="form-control modal-inputs" [(ngModel)]="eduDataBkp.startDate" [ngModel]="eduDataBkp.startDate | date: 'YYYY-MM-dd'" required #startDate="ngModel">
+                </div>
+                <!-- Validación de la fecha: 
+                    no puede estar vacía,
+                    tiene que ser fecha válida -->
+                <div *ngIf="startDate.invalid && (startDate.dirty || startDate.touched)" class="alert">
+                    <div *ngIf="startDate.errors?.['required']">
+                        The Start date is required.
+                    </div>
+                    <div *ngIf="startDate.errors?.['required']">
+                        The Start date must be a valid date.
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text modal-labels">End Date</span>
+                    </div>
+                    <input type="date" class="form-control modal-inputs" [(ngModel)]="eduDataBkp.endDate" [ngModel]="eduDataBkp.endDate | date: 'YYYY-MM-dd'" required #endDate="ngModel">
+                </div>
+                <!-- Validacion de la fecha final: formato fecha -->
+                <div *ngIf="endDate.invalid && (endDate.dirty || endDate.touched)" class="alert">
+                    <div *ngIf="endDate.errors?.['required']">
+                        The end date is required.
+                    </div>
+                    <div *ngIf="startDate.errors?.['required']">
+                        The Start date must be a valid date.
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text modal-labels">Place</span>
+                    </div>
+                    <input type="text" class="form-control modal-inputs" [(ngModel)]="eduDataBkp.place" required #place="ngModel">
+                </div>
+                <!-- Validacion del lugar: no puede estar vacío -->
+                <div *ngIf="place.invalid && (place.dirty || place.touched)" class="alert">
+                    <div *ngIf="place.errors?.['required']">
+                        Place is required.
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text modal-labels">Institucional web</span>
+                    </div>
+                    <input type="text" class="form-control modal-inputs" [(ngModel)]="eduDataBkp.webPage">
+                </div>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text modal-labels">Certificate</span>
+                    </div>
+                    <input type="text" class="form-control modal-inputs" [(ngModel)]="eduDataBkp.certificate">
+                </div>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text modal-labels">Online Certificate</span>
+                    </div>
+                    <input type="text" class="form-control modal-inputs" [(ngModel)]="eduDataBkp.certLink">
+                </div>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text modal-labels">Logo</span>
+                    </div>
+                    <input type="text" class="form-control modal-inputs" [(ngModel)]="eduDataBkp.logo" required #logo="ngModel">
+                </div>
+                <div>
+                    <img src="{{eduDataBkp.logo}}" class="logoInstitute mx-auto d-block" alt="Institute Logo Preview">
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn modal-inputs" data-dismiss="modal" (click)="closeEduModal()">Close</button>
+                <button type="button" class="btn modal-inputs" data-dismiss="modal" (click)="eduUpdate()">Save changes</button>
+                <!-- The data-dismiss was added to the save changes buton in order to close the modal dialog properlyc -->
+            </div>
+      </div>
+    </div>
+</div>
+
+<div *ngIf=showDelEduModal class="modal fade" id="delEduModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title modal-labels">Delete education item</h5>
+                <button type="button" class="close" data-dismiss="modal" (click)="closeDelEduModal()">
+                    <span class="modal-labels">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h4 class="delMessage" >Are you sure do you whant to delete the item <br> <strong>{{eduDataBkp.institute}}</strong>? </h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn modal-inputs" data-dismiss="modal" (click)="closeDelEduModal()">Cancel</button>
+                <button type="button" class="btn modal-inputs" data-dismiss="modal" (click)="eduDelete(eduDataBkp.id)">Delete Item</button>
+                <!-- Tha data-dismiss was added to the save changes buton in order to close the modal dialog properlyc -->
+            </div>
+        </div>
     </div>
 </div>

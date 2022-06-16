@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 import { Person } from 'src/app/interfaces';
 import { BackendService } from 'src/app/servicio/backend.service';
+import { LoginService } from 'src/app/servicio/login.service';
 import { PERSON } from 'src/emptys';
 
 @Component({
@@ -17,7 +18,8 @@ export class PersonalDataComponent implements OnInit {
   showModal:boolean=false;
   
   
-  constructor(private backend:BackendService) { }
+  constructor(private backend:BackendService,
+              private login:LoginService) { }
 
   readPerson():void{
     this.backend.readPerson().subscribe(xdata =>{
@@ -49,6 +51,11 @@ export class PersonalDataComponent implements OnInit {
       }
     });
     this.showModal=false;
+  }
+
+  //function to enable edit and delete icons
+  editable():boolean{
+    return this.login.isloged();
   }
   
 }

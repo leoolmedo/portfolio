@@ -9,6 +9,11 @@ import { PersonalDataComponent } from './components/personal-data/personal-data.
 import { JobsComponent } from './components/jobs/jobs.component';
 import { EducationComponent } from './components/education/education.component';
 import { FormsModule } from '@angular/forms';
+import { SkilsComponent } from './components/skils/skils.component';
+import { ProjectsComponent } from './components/projects/projects.component';
+import { NgCircleProgressModule } from 'ng-circle-progress';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,11 +22,15 @@ import { FormsModule } from '@angular/forms';
     PersonalDataComponent,
     JobsComponent,
     EducationComponent,
+    SkilsComponent,
+    ProjectsComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgCircleProgressModule.forRoot({}),
+   
   ],
   providers: [],
   bootstrap: [AppComponent]

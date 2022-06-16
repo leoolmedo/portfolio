@@ -1,0 +1,33 @@
+<div class="card card-item" >
+    <div class="card-body">
+        <h4 class="card-title"><strong>My skils</strong></h4>
+        <p class="card-text"><strong>Theese are my skills.   </strong></p>
+        <p class="card-txt">All the knowledge i learn during my carreer and jobs, to build me as I am, in a profesional and personal way.</p>
+        <p *ngIf="editable()"> Add a new skill selecting the pluss button</p>
+        <div>
+            <button *ngIf="editable()" type="button" class="menuButton" data-toggle="modal" data-target="#job-modal" (click)="onNewSkil()">
+                <i class="fas fa-plus-circle"> Add</i> 
+            </button>
+        </div> 
+    </div>
+</div>
+
+<div class="progress skil-div">
+    <div class="progress-bar skil-bar" role="progressbar" style="width: 50%; background-color: aquamarine;">
+        <img src="https://www.php.net/images/php8/logo_php8_1.svg" class="skil-logo" alt="Skil logo">Skil name
+    </div>
+    
+</div>
+
+<circle-progress 
+        [percent]="85"
+        [radius]="50"
+        [outerStrokeWidth]="10"
+        [innerStrokeWidth]="5"
+        [outerStrokeColor]="'#78C000'"
+        [innerStrokeColor]="'#C7E596'"
+        [animation]="true"
+        [animationDuration]="300"
+        [title]="'Skil'"
+        [titleColor]="'red'"
+    ></circle-progress>

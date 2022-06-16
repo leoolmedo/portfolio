@@ -8,9 +8,16 @@
     background-color: rgba(243, 122, 137, 0.3);
     /* color: rgb(182, 62, 62); */
     color: rgb(216, 182, 185);
-
-    
 }
+
+.menuButton{
+    /* padding: 1em; */
+    margin: 0.5em;
+    border-radius: 25px;
+    background-color: rgba(243, 122, 137, 0.3);
+    color: rgb(216, 182, 185);
+}
+
 .card-item h1{
 
     font-size: 1.3rem;
@@ -21,6 +28,41 @@
     word-break: break-word;
 }
 
+.logoInstitute{
+    width: 15em;
+    /* height: 50px; */
+}
+
 .btn-edit{
     text-align: right;
+    color: rgb(163, 200, 202);
 }
+
+.modal-content{
+    background-color: rgba(243, 122, 137, 0.7);
+}
+
+.modal-labels{
+    background-color: rgba(255, 255, 255, 0);
+    border: 0px; 
+    color: rgb(230, 204, 207);
+    font-weight: bold;
+}
+
+.modal-inputs{
+    background-color: rgba(255, 255, 255, 0);
+    border-color: rgb(216, 182, 185);
+    color: rgb(230, 204, 207);
+    margin: 0.5em;
+}
+
+.delMessage{
+    padding: 2em;
+    color: rgb(230, 204, 207);
+    margin: 0.5em;
+}
+
+.img-thumbnail{
+    max-width: 15em;
+}
+
