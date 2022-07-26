@@ -31,9 +31,10 @@ export interface Education{
 export interface Skill{
     id: number;
     ratio: number;
-    name: String;
-    logo: String;
-    link: String;
+    name: string;
+    logo: string;
+    link: string;
+    kind: boolean; //true: hardSkill false: SoftSkill
 }
 
 export interface Jobs{

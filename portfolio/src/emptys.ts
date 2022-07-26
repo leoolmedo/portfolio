@@ -35,7 +35,8 @@ export const PERSON:Person = {
        ratio: 0,
        name: "",
        logo: "undefined",
-       link: "undefined"
+       link: "undefined",
+       kind: false,
    };
 
    export const JOBS:Jobs ={

@@ -15,7 +15,10 @@ export class BackendService {
     deleducation: this.rooturl + "/deleducation/",
     readjob: this.rooturl + "/readwork/",
     savejob: this.rooturl + "/savework/",
-    deljob: this.rooturl + "/delwork/"
+    deljob: this.rooturl + "/delwork/",
+    readskill: this.rooturl + "/readskill/",
+    saveskill: this.rooturl + "/saveskill/",
+    delskill: this.rooturl + "/delskill/"
   
   }
   constructor(private Http:HttpClient) { }
@@ -52,5 +55,17 @@ export class BackendService {
 
   delJob(id:number):Observable<any>{
     return this.Http.delete(this.urls.deljob + id);          //delete the education item
+  }
+
+  readSkill():Observable<any>{
+    return this.Http.get(this.urls.readskill);
+  }
+
+  updateSkill(skilData:any):Observable<any>{
+    return this.Http.post<any>(this.urls.saveskill, skilData);  //save updated data of skill
+  }
+
+  delSkill(id:number):Observable<any>{
+    return this.Http.delete(this.urls.delskill + id);      //delete a skill
   }
 }

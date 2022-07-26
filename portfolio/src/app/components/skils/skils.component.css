@@ -34,14 +34,65 @@
     color: rgb(120, 197, 209);
 }
 
-.skil-div{
-    height: 5em;
+.skill-div{
+    height: 4em;
     margin: 20px auto;
     border-radius: 25px;
     background-color: rgba(83, 176, 190, 0.4);
     color: rgb(81, 173, 187);
 }
 
-.skil-logo{
-    height: 2em;
+.skill-logo{
+    max-height: 50px;
+    max-width: 50px;
+    /* object-fit: contain; */
+    /* float: left; */
 }
+
+.skill-separator{
+
+    margin: 20px auto;
+    border-radius: 25px;
+    background-color: rgba(105, 248, 248, 0.692);
+    color: rgb(59, 124, 134);
+}
+    
+.sSLabel{
+    color: rgb(81, 173, 187);
+}
+
+/* .soft-content{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 10px;
+} */
+
+.softItems{
+    display: inline-block;                  /* one beside the other instead of below */
+    position: relative;
+}
+
+.modal-content{
+    background-color: rgba(49, 111, 121, 0.7);
+}
+
+.modal-labels{
+    background-color: rgba(255, 255, 255, 0);
+    border: 0px; 
+    color: rgb(81, 173, 187);
+    font-weight: bold;
+}
+
+.modal-inputs{
+    background-color: rgba(255, 255, 255, 0);
+    background: rgba(49, 111, 121, 0.7);
+    border-color: rgb(81, 173, 187);
+    color: rgb(81, 173, 187);
+    margin: 0.5em;
+}
+
+.modal-option{
+    background: rgba(49, 111, 121, 0.7);
+    color: rgb(81, 173, 187);
+}
+

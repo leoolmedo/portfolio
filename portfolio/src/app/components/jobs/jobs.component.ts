@@ -78,7 +78,7 @@ export class JobsComponent implements OnInit {
 
   onEditJobModal(id2edit:number){
 
-    Object.assign(this.jobDataBkp,this.jobData.find(edu=>edu.id == id2edit));
+    Object.assign(this.jobDataBkp,this.jobData.find(job=>job.id == id2edit));
     this.showJobModal=true;
   }
 
@@ -88,7 +88,7 @@ export class JobsComponent implements OnInit {
         this.readJob();
       },
       error: (error) => {
-        alert("Errro while updating the Education item: " + this.jobDataBkp.id + "\n" + error);
+        alert("Errro while updating the Job item: " + this.jobDataBkp.id + "\n" + error);
       }
     })
     this.closeJobModal();

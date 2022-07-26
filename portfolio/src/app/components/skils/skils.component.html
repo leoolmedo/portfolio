@@ -1,33 +1,154 @@
 <div class="card card-item" >
     <div class="card-body">
-        <h4 class="card-title"><strong>My skils</strong></h4>
+        <h4 class="card-title"><strong>My skills</strong></h4>
         <p class="card-text"><strong>Theese are my skills.   </strong></p>
-        <p class="card-txt">All the knowledge i learn during my carreer and jobs, to build me as I am, in a profesional and personal way.</p>
+        <p class="card-text">All the adquired knowledges, learned during my carreer and jobs, those that build me as I am, in a profesional and personal way.</p>
         <p *ngIf="editable()"> Add a new skill selecting the pluss button</p>
-        <div>
-            <button *ngIf="editable()" type="button" class="menuButton" data-toggle="modal" data-target="#job-modal" (click)="onNewSkil()">
+        <div *ngIf="editable()">
+            <button type="button" class="menuButton" data-toggle="modal" data-target="#skill-modal" (click)="onNewSkill()">
                 <i class="fas fa-plus-circle"> Add</i> 
-            </button>
+            </button> <p class="card-text">(Click on the item's icon to modify it.)</p>
         </div> 
     </div>
 </div>
 
-<div class="progress skil-div">
-    <div class="progress-bar skil-bar" role="progressbar" style="width: 50%; background-color: aquamarine;">
-        <img src="https://www.php.net/images/php8/logo_php8_1.svg" class="skil-logo" alt="Skil logo">Skil name
-    </div>
-    
+<div class="card skill-separator">      <!-- Skills separator -->
+    <h5 class="card-title text-center align-middle"><strong>Hard Skills</strong></h5>
 </div>
 
-<circle-progress 
-        [percent]="85"
-        [radius]="50"
-        [outerStrokeWidth]="10"
-        [innerStrokeWidth]="5"
-        [outerStrokeColor]="'#78C000'"
-        [innerStrokeColor]="'#C7E596'"
-        [animation]="true"
-        [animationDuration]="300"
-        [title]="'Skil'"
-        [titleColor]="'red'"
-    ></circle-progress>
+<ng-container *ngFor="let skill of skillData">
+    <div *ngIf="skill.kind">
+        <div class="row">
+            <div class="col-3 col-sm-2 col-lg-1" title="{{titleEdit}}">
+                <button type="button" class="btn" data-toggle="modal" data-target="#skill-modal" (click)="onEditSkillModal(skill.id)">
+                    <img src="{{skill.logo}}" class="skill-logo align-middle" alt="{{skill.name}}">
+                </button>
+            </div>
+            <div class="col-9 col-sm-10 col-lg-11">
+                <div class="progress skill-div">
+                    <div class="progress-bar skill-bar" role="progressbar" style="width: {{skill.ratio}}%; background-color: aquamarine;">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</ng-container>
+
+
+<div class="card skill-separator">
+    <h5 class="card-title text-center align-middle"><strong>Soft Skills</strong></h5>
+</div>
+<!-- https://www.npmjs.com/package/ng-circle-progress -->
+
+<div class="soft-content">
+    <ng-container *ngFor="let skill of skillData">
+        <div *ngIf="!skill.kind" class="softItems">
+            <button title="{{titleEdit}}" type="button" class="btn" data-toggle="modal" data-target="#skill-modal" (click)="onEditSkillModal(skill.id)">
+                <circle-progress 
+                    [percent]="skill.ratio"
+                    [radius]="50"
+                    [outerStrokeWidth]="10"
+                    [outerStrokeColor]="'#51adbb'"
+                    [innerStrokeWidth]="3"
+                    [innerStrokeColor]="'rgba(83, 176, 190, 0.4)'"
+                    [backgroundStrokeWidth]="0"
+                    [animation]="true"
+                    [animationDuration]="300"
+                    [title]="''"
+                    [titleColor]="'red'"
+                    [subtitle]="skill.ratio.toString()"
+                    [subtitleColor]="'red'"
+                    [imageSrc]="skill.logo"
+                    [imageHeight]="50"
+                    [imageWidth]="50"
+                    [showImage]="true"
+                    [showBackground]="false"
+                >
+                </circle-progress>
+            </button>
+            <p class="sSLabel">{{skill.name}}</p>
+        </div>
+    </ng-container>
+</div>
+
+<div *ngIf=showSkillModal class="modal fade" id="skill-modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title modal-labels">Edit Skill information</h5>
+                <button type="button" class="close" data-dismiss="modal" (click)="closeSkillModal()">
+                    <span class="modal-labels">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text modal-labels">Name</span>
+                    </div>
+                    <input type="text" class="form-control modal-inputs" [(ngModel)]="skillDataBkp.name" required #skillName="ngModel">
+                </div>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text modal-labels">Logo</span>
+                    </div>
+                    <input type="text" class="form-control modal-inputs" [(ngModel)]="skillDataBkp.logo" required #SkillLogo="ngModel">
+                </div>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text modal-labels">Certificate Link</span>
+                    </div>
+                    <input type="text" class="form-control modal-inputs" [(ngModel)]="skillDataBkp.link" #skillLink="ngModel">
+                </div>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text modal-labels">Kind</span>
+                    </div>
+                    <select class="form-control modal-inputs" [(ngModel)]="skillDataBkp.kind">
+                        <option class="modal-option" value="true">Hard skill</option>
+                        <option class="modal-option" value="false">Soft Skill</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text modal-labels">Ratio</span>
+                    </div>
+                    <input type="number" min="0" max="100" class="form-control modal-inputs" [(ngModel)]="skillDataBkp.ratio" required #skillLink="ngModel">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn modal-inputs" data-dismiss="modal" data-toggle="modal" data-target="#del-skill-modal" (click)="onDelSkillModal(skillDataBkp.id)">
+                    <i class="fa fa-trash-alt btn-edit"></i> Delete
+                </button>
+                <button type="button" class="btn modal-inputs" data-dismiss="modal" (click)="closeSkillModal()">Close</button>
+                <button type="button" class="btn modal-inputs" data-dismiss="modal" (click)="skillUpdate()">Save changes</button>
+                <!-- The data-dismiss was added to the save changes buton in order to close the modal dialog properlyc -->
+
+            </div>
+      </div>
+    </div>
+</div>
+
+<div *ngIf=showDelSkillModal class="modal fade" id="del-skill-modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title modal-labels">Delete Skill item</h5>
+                <button type="button" class="close" data-dismiss="modal" (click)="closeDelSkillModal()">
+                    <span class="modal-labels">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h4 class="delMessage text-center" >Are you sure do you want to delete the item <strong>{{skillDataBkp.name}}</strong> ? </h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn modal-inputs" data-dismiss="modal" (click)="closeDelSkillModal()">Cancel</button>
+                <button type="button" class="btn modal-inputs" data-dismiss="modal" (click)="skillDelete(skillDataBkp.id)">Delete Item</button>
+                <!-- The data-dismiss was added to the save changes buton in order to close the modal dialog properlyc -->
+            </div>
+        </div>
+    </div>
+</div>
