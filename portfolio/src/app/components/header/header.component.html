@@ -15,19 +15,19 @@
         <div *ngIf="myError == 0; then ok; else notOk")></div>
         <ng-template #ok>       
             <div class="row align-items-middle bottom-header" >
-                <div class="col-11 col-sm-4 col-md-3">
+                <div class="col-11 col-sm-4 col-md-2">
                     <div class="profile-image-container"><img class="profile-image" src="./assets/img/perfil4.png"></div>
                     <div class="align-bottom login-btn">
                         <button class="pad-top btn-danger" (click)="onClickEdit()">Login</button>
                     </div>
                 </div>
 
-                <div class="col-11 col-sm-7 col-md-4">
+                <div class="col-11 col-sm-7 col-md-6">
                     
                     <div class="padding-extra">
 
                         <h2>{{personData.names}} {{personData.lastNames}} </h2>
-                        <div class="info-company">M&O tecnician en Telespazio Argentina</div>
+                        <div class="info-company">{{personData.about}}</div>
                         <div class="info-contact">
                             <p>{{personData.state}}, {{personData.country}}</p>
                             <!-- <p><a href="#" class="link">Información de contacto</a></p> -->

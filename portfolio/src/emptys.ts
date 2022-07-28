@@ -14,7 +14,9 @@ export const PERSON:Person = {
     country:'',
     user:'',
     password:'',
-    bornDate: new Date()
+    bornDate: new Date(),
+    about:'',
+    profilePicture:''
    };
 
    export const EDUCATION:Education = {
