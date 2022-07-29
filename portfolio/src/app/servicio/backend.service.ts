@@ -6,7 +6,8 @@ import { Observable, observable } from 'rxjs';
   providedIn: 'root'
 })
 export class BackendService {
-  rooturl:String = "http://localhost:8080"
+  rooturl:String = "https://evening-stream-47799.herokuapp.com";
+  // rooturl:String = "http://localhost:8080"
   urls ={
     readperson: this.rooturl + "/readperson/",
     saveperson: this.rooturl + "/saveperson/",
