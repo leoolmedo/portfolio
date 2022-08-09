@@ -14,3 +14,7 @@ export interface Person{
  password:String;
  bornDate:Date;
 }
+export interface UsrPass{
+    hardUser: string;
+    hardPass: string;
+}

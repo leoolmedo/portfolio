@@ -46,6 +46,11 @@
 
 .link{
     color: rgb(182, 62, 62);
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.link-item{
+    color: rgb(182, 62, 62);
 }
 
 .media-link{
@@ -62,10 +67,20 @@
     line-height: 1.25;
 }
 
-.info-contact{
-    font-size: 1em;
+.modal-labels{
+    background-color: rgba(255, 255, 255, 0);
+    border: 0px; 
+    color: rgb(182, 62, 62);
+    font-weight: bold;
 }
 
-.login-btn{
-    height: 3em;
+.modal-inputs{
+    background-color: rgba(255, 255, 255, 0);
+    border-color: rgb(182, 62, 62);
+    color: rgb(182, 62, 62);
+    margin: 0.5em;
+}
+
+.modal-content{
+    background-color: rgba(199, 195, 195, 0.815);
 }

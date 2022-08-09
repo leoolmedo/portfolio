@@ -1,3 +1,4 @@
+import { UsrPass } from "./app/interfaces";
 import { Education, Jobs, Person, Skill} from "./interfaces";
 
 export const PERSON:Person = {
@@ -53,3 +54,8 @@ export const PERSON:Person = {
        startDate: new Date(),
        endDate: new Date()
    };
+
+   export const USRPASS:UsrPass ={
+    hardUser: "",
+    hardPass: ""
+   } 

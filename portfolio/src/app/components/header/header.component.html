@@ -16,84 +16,127 @@
         <ng-template #ok>       
             <div class="row align-items-middle bottom-header" >
                 <div class="col-11 col-sm-4 col-md-2">
-                    <div class="profile-image-container"><img class="profile-image" src="./assets/img/perfil4.png"></div>
-                    <div class="align-bottom login-btn">
-                        <button class="pad-top btn-danger" (click)="onClickEdit()">Login</button>
-                    </div>
+                    <div class="profile-image-container"><img class="profile-image" src={{personData.profilePicture}}></div>
                 </div>
 
-                <div class="col-11 col-sm-7 col-md-6">
-                    
+                <div class="col-11 col-sm-7 col-md-9">
                     <div class="padding-extra">
-
                         <h2>{{personData.names}} {{personData.lastNames}} </h2>
                         <div class="info-company">{{personData.about}}</div>
-                        <div class="info-contact">
-                            <p>{{personData.state}}, {{personData.country}}</p>
-                            <!-- <p><a href="#" class="link">Información de contacto</a></p> -->
+                        <div class="info-company">
+                            <p>Currently i'm living in the city of {{personData.city}} - {{personData.state}}, {{personData.country}}</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="d-none d-md-block col-md-4">
-                    <ul class=" list-unstyled"> 
-                        <li>
-                            <a target="_blank" href="https://www.telespazio.com/es/argentina">
-                                <img src="./assets/img/logo-tpz.png" class="prof-logo-company">
-                                <span class="h5 link">Telespazio Argentina</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a target="_blank" href="#">
-                                <img src="./assets/img/syl_systems_escudo_fondo_transparente.png" class="prof-logo-company">
-                                <span class="h5 link">SyL Systems</span>
-                            </a>
-                        </li>
-                    </ul>
-
-                    <p><a href="#" class="link">Información de contacto</a></p>
-                    <a class="media-link link" href="https://www.facebook.com/leoolmedo3677" target="_blank" title="Facebook">
-                        <i class="fab fa-facebook  fa-lg"></i>
-                    </a>
-
-                    <a class="media-link link" href="https://www.github.com" target="_blank" title="GitHub">
-                        <i class="fab fa-github  fa-lg"></i>
-                    </a>
-                    
-                    <a class="media-link link" href="https://www.instagram.com" target="_blank" title="Instagram">
-                        <i class="fab fa-instagram fa-lg"></i>
-                    </a>
-
-                    <a class="media-link link" href="https://www.linkedin.com" target="_blank" title="LinkedIn">
-                        <i class="fab fa-linkedin  fa-lg"></i> 
-                    </a>
-
-                    <a class="media-link link" href="skype:leoolmedo?call" target="_blank" title="skype call">
-                        <i class="fab fa-skype  fa-lg"></i>
-                    </a>
-
-                    <a class="media-link link" href="https://twitter.com/leojaviolmedo" target="_blank" title="Twitter profile">
-                        <i class="fab fa-twitter  fa-lg"></i> 
-                    </a>
-
-                    <a class="media-link link" href="https://wa.me/5492604312515" target="_blank" title="Whatsapp text">
-                        <i class="fab fa-whatsapp fa-lg"></i>
-                    </a>
-
-                    <a class="media-link link" href="" target="_blank" title="Phone call">
-                        <i class="fas fa-phone  fa-lg"></i>
-                    </a>
-
-                    <a class="media-link link" href="" target="_blank" title="Web Page">
-                        <i class="far fa-newspaper fa-lg"></i>
-                    </a>
-                </div>
-                <div class="col-1">
+                <div class="d-md-block col-sm-1">
+                    <button class="btn btn-secondary dropdown-toggle link" type="button" data-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="dropdown-menu link">
+                        <button [disabled]="editable()" class="pad-top dropdown-item link-item" data-toggle="modal" data-target="#login-modal" (click)="showLoginModal()">Login</button>
+                        <button [disabled]="!editable()" class="pad-top dropdown-item link-item" data-toggle="modal" data-target="#changePass-modal" (click)="showChangePass()">Change password</button>
+                        <button [disabled]="!editable()" class="pad-top dropdown-item link-item" (click)="onClickLogout()">Logout</button>
+                    </div>  
                     <div *ngIf="editable()" class="btn-edit">
-                        <a href="#" class="btn-right link"> <i class="fa fa-pen"></i></a>
+                        <a href="#" class="btn-right link-item"> <i class="fa fa-pen"></i></a>
+                    </div> 
+                </div>
+            </div>
+
+            <!-- login Modal -->
+            <div *ngIf="loginModal" class="modal fade" id="login-modal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header loginModalLabels">
+                            <h5 class="Login modal-labels" >Login</h5>
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span class="modal-labels" >&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text modal-labels">User</span>
+                                </div>
+                                <input type="text" class="form-control modal-inputs" [(ngModel)]="user" required >
+                            </div>
+
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text modal-labels">Password</span>
+                                </div>
+                                <input type="password" class="form-control modal-inputs" [(ngModel)]="password" required >
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn modal-inputs" data-dismiss="modal" (click)="closeLoginModal()">Cancel</button>
+                        <button type="button" class="btn modal-inputs" data-dismiss="modal" (click)="onClickLogin()">Login</button>
+                        </div>
                     </div>
                 </div>
             </div>
+
+
+            <!-- change password Modal -->
+            <div *ngIf="changePassModal" class="modal fade" id="changePass-modal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header loginModalLabels">
+                            <h5 class="Login modal-labels" >Login</h5>
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span class="modal-labels" >&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text modal-labels">Old Password</span>
+                                </div>
+                                <input type="password" class="form-control modal-inputs" [(ngModel)]="oldPass" required >
+                            </div>
+
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text modal-labels">New Password</span>
+                                </div>
+                                <input type="password" class="form-control modal-inputs" [(ngModel)]="newPass" required >
+                            </div>
+
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text modal-labels">Repeat New Password</span>
+                                </div>
+                                <input type="password" class="form-control modal-inputs" [(ngModel)]="newPass2" required >
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn modal-inputs" data-dismiss="modal" (click)="closeChangePassModal()">Cancel</button>
+                        <button type="button" class="btn modal-inputs" data-dismiss="modal" (click)="onClickChangePass()">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div *ngIf="showMessageModal" class="modal fade" id="showMessage-modal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header loginModalLabels">
+                            <h3 class="Login modal-labels" >Message</h3>
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span class="modal-labels" >&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <h5>{{message}}</h5>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn modal-inputs" data-dismiss="modal" (click)="closeMessageModal()">Ok</button>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+  
         </ng-template>
         <ng-template #notOk>
             <div class="row align-items-middle bottom-header" >
