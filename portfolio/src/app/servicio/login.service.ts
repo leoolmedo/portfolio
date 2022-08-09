@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { USRPASS } from 'src/emptys';
 import { UsrPass } from '../interfaces';
-// import * as bcrypt from '../../../node_modules/bcrypt';
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +15,6 @@ export class LoginService {
   private urlUserPass:string = "../assets/data/userpass.json";
   private userData: UsrPass= USRPASS;
 
-  //variables to generate the hash
-    // const saltRounds = 8;
-  
 
   constructor(private Http:HttpClient) { }
 
@@ -30,21 +27,8 @@ export class LoginService {
     this.editEnabled = login;
   }
 
-  // readUser():Observable<any>{
-  //   return this.Http.get(this.urlUserPass);
-  // }
-
     readUser():any{
-    this.Http.get(this.urlUserPass).subscribe(
-      {
-        next: (data) =>{
-          return data;
-        },
-        error:(error) =>{
-          return error;
-        }
-      }
-    );
+
   }
 
   updateUser(userData:any):Observable<any>{
@@ -52,33 +36,12 @@ export class LoginService {
   }
 
   validatePass(user:string,password:string):boolean{
-    this.userData = this.readUser();
-    console.log("userData: "+this.userData);
-    console.log("user: "+this.userData.hardUser + " == " + user);
-    console.log("pass: "+this.userData.hardPass + " == " + password);
-    if((this.userData.hardUser == user) && (this.userData.hardPass == password)){                   //plain text password
-      console.log("Access grant");
-      return (true);
-    }
-    else{
-      console.log("Access denied");
       return(false);
-    }
 
   }
 
 
   updatePassord(user:string, oldPass:string, newPass:string, newPass2:string):boolean{
-    if(this.validatePass(user, oldPass)){
-      console.log("oldpass is valid!");
-      if(newPass==newPass2 && newPass != oldPass){
-        console.log("np==np2 a& op!=np ");
-        this.userData.hardPass=newPass;
-        this.userData.hardUser=user
-        this.Http.post<any>(this.urlUserPass, this.userData);
-        return(true);
-      }
-    }
     return (false);
   }
 

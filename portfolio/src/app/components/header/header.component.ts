@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BackendService } from 'src/app/servicio/backend.service';
+import { LoginService } from 'src/app/servicio/login.service';
 import { PERSON } from 'src/emptys';
 import { Person } from 'src/interfaces';
 import Swal from 'sweetalert2';
@@ -27,6 +28,7 @@ export class HeaderComponent implements OnInit {
   
 
   constructor(private servBackend:BackendService,
+              private servlogin:LoginService
               ) { }
   
 
@@ -52,7 +54,15 @@ export class HeaderComponent implements OnInit {
   }
 
   onClickLogin():void{
-    this.edit= this.validatePass(this.user, this.password);
+    if(this.validatePass(this.user, this.password)){
+      this.edit= true;
+      this.servlogin.setlogin(true);
+    }
+    else{
+      this.edit= false;
+      this.servlogin.setlogin(false);
+    }
+    
   }
 
   validatePass(user:string, password:string):boolean
@@ -75,6 +85,7 @@ export class HeaderComponent implements OnInit {
     this.edit=false
     this.user="";
     this.password="";
+    this.servlogin.setlogin(false);
   }
 
 
